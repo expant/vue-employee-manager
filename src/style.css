@@ -13,6 +13,50 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+* {
+  color: #213547;
+}
+
+input,
+button {
+  font: inherit;
+}
+
+input {
+  border: 1px solid #d0d7de;
+  border-radius: 6px;
+  padding: 6px 8px;
+  background: #fff;
+  color: #24292f;
+}
+
+input:focus {
+  outline: none;
+  border-color: #0969da;
+  box-shadow: 0 0 0 1px #0969da;
+}
+
+label {
+  font-size: 14px;
+  color: #24292f;
+}
+
+.btn {
+  padding: 6px 10px;
+  border: 1px solid #d0d7de;
+  border-radius: 6px;
+
+  background: #f6f8fa;
+  color: #213547;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.btn--icon {
+  padding: 6px;
+  line-height: 0;
+}
+
 a {
   font-weight: 500;
   color: #646cff;

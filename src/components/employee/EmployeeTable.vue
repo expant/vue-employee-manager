@@ -5,53 +5,59 @@ defineProps(['employees']);
 </script>
 
 <template>
-  <table class="employee-table">
-    <thead class="employee-table__title">
-      <tr>
-        <th>Имя</th>
-        <th>Фамилия</th>
-        <th>Стаж</th>
-        <th>Возраст</th>
-        <th>Адрес</th>
-        <th></th>
-      </tr>
-    </thead>
-    <tbody class="employee-table__body">
-      <template v-if="employees.length">
-        <tr v-for="employee in employees" :key="employee.id">
-          <td>{{ employee.firstName }}</td>
-          <td>{{ employee.lastName }}</td>
-          <td>{{ employee.experience }}</td>
-          <td>{{ employee.age }}</td>
-          <td>{{ employee.address }}</td>
-          <td class="edit-col">
-            <button class="edit-button" type="button">
-              <EditIcon />
-            </button>
-          </td>
-        </tr>
-      </template>
-      <template v-else>
+  <div class="table-wrapper">
+    <table class="employee-table">
+      <thead class="employee-table__title">
         <tr>
-          <td colspan="6">Список сотрудников пуст</td>
+          <th>Имя</th>
+          <th>Фамилия</th>
+          <th>Стаж</th>
+          <th>Возраст</th>
+          <th>Адрес</th>
+          <th></th>
         </tr>
-      </template>
-    </tbody>
-  </table>
+      </thead>
+      <tbody class="employee-table__body">
+        <template v-if="employees.length">
+          <tr v-for="employee in employees" :key="employee.id">
+            <td>{{ employee.firstName }}</td>
+            <td>{{ employee.lastName }}</td>
+            <td>{{ employee.experience }}</td>
+            <td>{{ employee.age }}</td>
+            <td>{{ employee.address }}</td>
+            <td class="edit-col">
+              <button class="edit-button" type="button">
+                <EditIcon />
+              </button>
+            </td>
+          </tr>
+        </template>
+        <template v-else>
+          <tr>
+            <td colspan="6" class="empty">Список сотрудников пуст</td>
+          </tr>
+        </template>
+      </tbody>
+    </table>
+  </div>
 </template>
 
 <style scoped>
+.table-wrapper {
+  min-height: 300px;
+  max-height: 600px;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  background: #fff;
+  overflow: hidden;
+  overflow-y: auto;
+}
+
 .employee-table {
   width: 100%;
-  min-height: 300px;
   border-collapse: separate;
   border-spacing: 0;
   font-size: 14px;
-  color: #374151;
-  background: #fff;
-  border: 1px solid #e5e7eb;
-  border-radius: 8px;
-  overflow: hidden;
 }
 
 .employee-table__title {
@@ -102,5 +108,11 @@ th {
 
 .edit-col:hover {
   background: #f9fafb;
+}
+
+.empty {
+  text-align: center;
+  color: #6b7280;
+  padding: 24px;
 }
 </style>
