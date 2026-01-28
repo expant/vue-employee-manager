@@ -2,6 +2,7 @@
 import EditIcon from '../ui/icons/EditIcon.vue';
 
 defineProps(['employees']);
+defineEmits(['handleEdit']);
 </script>
 
 <template>
@@ -26,7 +27,7 @@ defineProps(['employees']);
             <td>{{ employee.age }}</td>
             <td>{{ employee.address }}</td>
             <td class="edit-col">
-              <button class="edit-button" type="button">
+              <button class="edit-button" type="button" @click="$emit('handleEdit', employee)">
                 <EditIcon />
               </button>
             </td>

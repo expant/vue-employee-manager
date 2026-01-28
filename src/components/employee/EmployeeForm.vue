@@ -1,7 +1,8 @@
 <script setup lang="ts">
-import { reactive } from 'vue';
+import { reactive, watch } from 'vue';
+import type { Employee } from '../../models/Employee';
 
-const employee = reactive({
+const form = reactive({
   firstName: '',
   lastName: '',
   experience: '',
@@ -9,42 +10,48 @@ const employee = reactive({
   address: '',
 });
 
-const emits = defineEmits(['submit', 'closeModal']);
+const props = defineProps<{
+  employee: Employee | null;
+}>();
+defineEmits(['submit']);
 
-const handleSubmit = () => {
-  emits('submit', employee);
-  emits('closeModal');
-};
+watch(
+  () => props.employee,
+  (value) => {
+    if (!value) return;
+    Object.assign(form, value);
+  },
+  { immediate: true }
+);
 </script>
 
 <template>
-  <form class="employee-form" @submit.prevent="handleSubmit">
-    <!-- Имя + Фамилия -->
+  <form class="employee-form" @submit.prevent="$emit('submit', form)">
     <div class="row">
       <div class="field">
         <label for="firstName">Имя</label>
-        <input id="firstName" v-model="employee.firstName" type="text" />
+        <input id="firstName" v-model="form.firstName" type="text" />
       </div>
 
       <div class="field">
         <label for="lastName">Фамилия</label>
-        <input id="lastName" v-model="employee.lastName" type="text" />
+        <input id="lastName" v-model="form.lastName" type="text" />
       </div>
     </div>
 
     <div class="field">
       <label for="experience">Стаж</label>
-      <input id="experience" v-model="employee.experience" type="text" />
+      <input id="experience" v-model="form.experience" type="text" />
     </div>
 
     <div class="field">
       <label for="age">Возраст</label>
-      <input id="age" v-model="employee.age" type="number" min="0" />
+      <input id="age" v-model="form.age" type="number" min="0" />
     </div>
 
     <div class="field">
       <label for="address">Адрес</label>
-      <input id="address" v-model="employee.address" type="text" />
+      <input id="address" v-model="form.address" type="text" />
     </div>
 
     <div class="actions">
