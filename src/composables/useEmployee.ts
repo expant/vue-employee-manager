@@ -11,7 +11,9 @@ export function useEmployee() {
   };
 
   const editEmployee = (employee: Employee) => {
-    employees.value = employees.value.map(current => current.id === employee.id ? employee : current);
+    employees.value = employees.value.map(
+      current => current.id === employee.id ? employee : current
+    );
   };
 
   return { employees, selectedEmployee, addEmployee, editEmployee };

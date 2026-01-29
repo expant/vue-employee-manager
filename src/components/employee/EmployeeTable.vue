@@ -45,7 +45,6 @@ defineEmits(['handleEdit']);
 
 <style scoped>
 .table-wrapper {
-  min-height: 300px;
   max-height: 600px;
   border: 1px solid #e5e7eb;
   border-radius: 8px;
