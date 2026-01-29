@@ -1,21 +1,23 @@
 <script setup lang="ts">
-import { Teleport } from 'vue';
+import { Teleport, Transition } from 'vue';
 import CloseIcon from './icons/CloseIcon.vue';
 
-defineProps(['isOpen']);
-defineEmits(['close']);
+defineProps<{ isOpen: boolean }>();
+defineEmits<{ close: [] }>();
 </script>
 
 <template>
   <Teleport to="body">
-    <div v-if="isOpen" class="overlay" @click.self="$emit('close')">
-      <div class="modal">
-        <button class="btn btn--icon btn--close" type="button" @click="$emit('close')">
-          <CloseIcon />
-        </button>
-        <slot />
+    <Transition name="modal">
+      <div v-if="isOpen" class="overlay" @click.self="$emit('close')">
+        <div class="modal">
+          <button class="btn btn-icon btn-close" type="button" @click="$emit('close')">
+            <CloseIcon />
+          </button>
+          <slot />
+        </div>
       </div>
-    </div>
+    </Transition>
   </Teleport>
 </template>
 
@@ -34,15 +36,35 @@ defineEmits(['close']);
 
 .modal {
   position: relative;
-  background-color: #fff;
   padding: 16px;
   padding-top: 25px;
+  background-color: #fff;
   border-radius: 8px;
+  transition: transform 0.2s ease;
 }
 
-.btn--close {
+.btn-close {
   position: absolute;
   top: 10px;
   right: 10px;
+}
+
+/* Transitions */
+.modal-enter-active,
+.modal-leave-active {
+  transition: opacity 0.2s ease;
+}
+
+.modal-enter-from,
+.modal-leave-to {
+  opacity: 0;
+}
+
+.modal-enter-from .modal {
+  transform: scale(0.95);
+}
+
+.modal-leave-to .modal {
+  transform: scale(0.95);
 }
 </style>
