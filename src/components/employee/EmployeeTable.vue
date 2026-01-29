@@ -1,8 +1,9 @@
 <script setup lang="ts">
 import EditIcon from '../ui/icons/EditIcon.vue';
+import type { Employee } from '../../models/Employee';
 
-defineProps(['employees']);
-defineEmits(['handleEdit']);
+defineProps<{ employees: Employee[]}>();
+defineEmits<{ handleEdit: [Employee] }>();
 </script>
 
 <template>
