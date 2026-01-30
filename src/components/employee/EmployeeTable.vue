@@ -2,6 +2,7 @@
 import EditIcon from '../ui/icons/EditIcon.vue';
 import type { Employee } from '../../models/Employee';
 
+// объявление пропса списка сотрудников и события редактирования сотрудника
 defineProps<{ employees: Employee[] }>();
 defineEmits<{ handleEdit: [Employee] }>();
 
@@ -11,7 +12,7 @@ const headers = ['Имя', 'Фамилия', 'Стаж', 'Возраст', 'Ад
 <template>
   <div class="table-wrapper">
 
-    <!-- Desktop -->
+    <!-- Десктопная версия: таблица сотрудников -->
     <table class="table">
       <thead class="table__head">
         <tr>
@@ -20,7 +21,10 @@ const headers = ['Имя', 'Фамилия', 'Стаж', 'Возраст', 'Ад
           </th>
         </tr>
       </thead>
+
       <tbody v-if="employees.length" class="table__body">
+
+        <!-- Использование цикла для вывода списка сотрудников -->
         <tr v-for="employee in employees" :key="employee.id">
           <td>{{ employee.firstName }}</td>
           <td>{{ employee.lastName }}</td>
@@ -34,6 +38,8 @@ const headers = ['Имя', 'Фамилия', 'Стаж', 'Возраст', 'Ад
           </td>
         </tr>
       </tbody>
+    
+      <!-- Если массив сотрудников пуст, рендерится информирующий об этом текст -->
       <tbody v-else class="table__body">
         <tr>
           <td colspan="6" class="empty">Список сотрудников пуст</td>
@@ -41,22 +47,30 @@ const headers = ['Имя', 'Фамилия', 'Стаж', 'Возраст', 'Ад
       </tbody>
     </table>
 
-    <!-- Mobile -->
-    <div class="table-list-mobile">
-      <div v-for="employee in employees" :key="employee.id" class="table-list-mobile__item">
-        <div class="table-list-mobile__head">
-          <div class="table-list-mobile__fullname">{{ employee.firstName }} {{ employee.lastName }}</div>
+    <!-- Мобильная версия: список сотрудников-->
+    <div v-if="employees.length" class="list-mobile">
+
+      <!-- Использование цикла для вывода списка сотрудников -->
+      <div v-for="employee in employees" :key="employee.id" class="list-mobile__item">
+        <div class="list-mobile__head">
+          <div class="list-mobile__fullname">{{ employee.firstName }} {{ employee.lastName }}</div>
           <button class="edit-button" type="button" @click="$emit('handleEdit', employee)">
             <EditIcon />
           </button>
         </div>
-        <div class="table-list-mobile__body">
-          <div><span class="table-list-mobile__label">Стаж: </span> {{ employee.experience }}</div>
-          <div><span class="table-list-mobile__label">Возраст: </span> {{ employee.age }}</div>
-          <div><span class="table-list-mobile__label">Адрес: </span> {{ employee.address }}</div>
+        <div class="list-mobile__body">
+          <div><span class="list-mobile__label">Стаж: </span> {{ employee.experience }}</div>
+          <div><span class="list-mobile__label">Возраст: </span> {{ employee.age }}</div>
+          <div><span class="list-mobile__label">Адрес: </span> {{ employee.address }}</div>
         </div>
       </div>
     </div>
+
+    <!-- Если массив сотрудников пуст, рендерится информирующий об этом текст -->
+    <div v-else class="list-mobile__empty">
+      Список сотрудников пуст
+    </div>
+
   </div>
 </template>
 
@@ -88,12 +102,8 @@ const headers = ['Имя', 'Фамилия', 'Стаж', 'Возраст', 'Ад
   color: #6b7280;
 }
 
-.table__head th:nth-child(4) {
-  width: 10%;
-}
-
 .table__head th:last-child {
-  width: 5%;
+  width: 10%;
 }
 
 .table__head th,
@@ -139,45 +149,52 @@ const headers = ['Имя', 'Фамилия', 'Стаж', 'Возраст', 'Ад
 }
 
 /* mobile */
-.table-list-mobile {
+.list-mobile {
   display: none;
   flex-direction: column;
   gap: 10px;
 }
 
-.table-list-mobile__item {
+.list-mobile__item {
   padding: 15px;
   border: 1px solid #e5e7eb;
   border-radius: 8px;
 }
 
-.table-list-mobile__head {
+.list-mobile__head {
   display: flex;
   justify-content: space-between;
   align-items: center;
   margin-bottom: 20px;
 }
 
-.table-list-mobile__fullname {
+.list-mobile__fullname {
   font-weight: 500;
   color: #6b7280;
   font-size: 18px;
 }
 
-.table-list-mobile__body {
+.list-mobile__body {
   text-align: left;
 }
 
-.table-list-mobile__body div:nth-child(odd) {
+.list-mobile__body div:nth-child(odd) {
   background: #F7F7F7;
 }
 
-.table-list-mobile__body div {
+.list-mobile__body div {
   padding: 5px;
 }
 
-.table-list-mobile__label {
+.list-mobile__label {
   font-weight: 600;
+}
+
+.list-mobile__empty {
+  display: none;
+  text-align: center;
+  margin-top: 20px;
+  color: #6b7280;
 }
 
 @media (max-width: 768px) {
@@ -185,8 +202,12 @@ const headers = ['Имя', 'Фамилия', 'Стаж', 'Возраст', 'Ад
     display: none;
   }
 
-  .table-list-mobile {
+  .list-mobile {
     display: flex;
+  }
+
+  .list-mobile__empty {
+    display: block;
   }
 }
 </style>

@@ -15,6 +15,7 @@ const experienceOptions = [
   '5+ лет',
 ];
 
+// Дефолтное состояние формы
 const form = reactive<Employee>({
   id: 0,
   firstName: '',
@@ -24,6 +25,8 @@ const form = reactive<Employee>({
   address: '',
 });
 
+// отслеживание состояния выбранного сотрудника (selectedEmployee)
+// при каждом изменении выполняется копирование данных selectedEmployee в форму
 watch(
   () => props.employee,
   (value) => {
@@ -35,7 +38,8 @@ watch(
 </script>
 
 <template>
-  <form class="employee-form" @submit.prevent="emit('submit', form)">
+  <form class="form" @submit.prevent="emit('submit', form)">
+  
     <div class="row">
       <div class="field">
         <label for="firstName">Имя</label>
@@ -71,18 +75,24 @@ watch(
     <div class="actions">
       <button type="submit" class="btn btn-primary">Сохранить</button>
     </div>
+  
   </form>
 </template>
 
 <style scoped>
 .row,
-.employee-form {
+.form {
   display: flex;
   gap: 12px;
 }
 
+.row {
+  width: 100%;
+  flex-wrap: wrap;
+}
+
 .field,
-.employee-form {
+.form {
   flex-direction: column;
 }
 
@@ -97,36 +107,10 @@ watch(
   margin-top: 8px;
 }
 
-label {
-  font-size: 14px;
-  margin-bottom: 4px;
-  color: #555;
-}
-
-input,
-select {
-  padding: 6px 32px 6px 8px;
-  border: 1px solid #ccc;
-  border-radius: 6px;
-  background-color: #fff;
-}
-
-select {
-  appearance: none;
-  background-image: url("data:image/svg+xml,%3Csvg width='12' height='8' viewBox='0 0 12 8' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23666' stroke-width='1.5' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
-  background-repeat: no-repeat;
-  background-position: right 8px center;
-  background-size: 12px 8px;
-}
-
-select:focus {
-  outline: none;
-  border-color: #0969da;
-  box-shadow: 0 0 0 1px #0969da;
-}
-
-option {
-  background-color: #111;
-  color: white;
+/* mobile */
+@media (max-width: 768px) {
+  .btn {
+    width: 100%;
+  }
 }
 </style>

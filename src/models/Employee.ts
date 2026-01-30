@@ -1,3 +1,4 @@
+// Типизация модели сотрудника
 export type Employee = {
   id: number;
   firstName: string;
