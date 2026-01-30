@@ -30,3 +30,7 @@ npm run dev
 npm run build
 npm run preview
 ```
+
+## 🌐 Deployment
+
+[🔗 Click](https://vue-employee-manager.vercel.app/)
