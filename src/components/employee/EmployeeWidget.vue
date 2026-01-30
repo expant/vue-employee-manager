@@ -7,7 +7,7 @@ import { useEmployee } from '../../composables/useEmployee';
 import type { Employee } from '../../models/Employee';
 
 const { isOpen, open, close } = useModal();
-const { employees, selectedEmployee, addEmployee, editEmployee } = useEmployee();
+const { selectedEmployee, addEmployee, editEmployee } = useEmployee();
 
 const resetEmployeeModal = () => {
   selectedEmployee.value = null;
@@ -28,13 +28,98 @@ const submitEmployeeForm = (employee: Employee) => {
 
   resetEmployeeModal();
 }
+
+// const employees: Employee[] = [
+//   {
+//     id: 1,
+//     firstName: 'Антон',
+//     lastName: 'Елагин',
+//     experience: '3–5 лет',
+//     age: 25,
+//     address: 'Тверь, ул. Тверская'
+//   },
+//   {
+//     id: 2,
+//     firstName: 'Ирина',
+//     lastName: 'Соколова',
+//     experience: '1–3 года',
+//     age: 23,
+//     address: 'Москва, ул. Профсоюзная'
+//   },
+//   {
+//     id: 3,
+//     firstName: 'Максим',
+//     lastName: 'Кузнецов',
+//     experience: '5+ лет',
+//     age: 32,
+//     address: 'Санкт-Петербург, Невский пр.'
+//   },
+//   {
+//     id: 4,
+//     firstName: 'Ольга',
+//     lastName: 'Иванова',
+//     experience: 'Менее 1 года',
+//     age: 21,
+//     address: 'Казань, ул. Баумана'
+//   },
+//   {
+//     id: 5,
+//     firstName: 'Дмитрий',
+//     lastName: 'Орлов',
+//     experience: '3–5 лет',
+//     age: 28,
+//     address: 'Екатеринбург, ул. Ленина'
+//   },
+//   {
+//     id: 6,
+//     firstName: 'Алина',
+//     lastName: 'Морозова',
+//     experience: '1–3 года',
+//     age: 24,
+//     address: 'Нижний Новгород, ул. Большая Покровская'
+//   },
+//   {
+//     id: 7,
+//     firstName: 'Сергей',
+//     lastName: 'Волков',
+//     experience: '5+ лет',
+//     age: 35,
+//     address: 'Новосибирск, ул. Красный проспект'
+//   },
+//   {
+//     id: 8,
+//     firstName: 'Екатерина',
+//     lastName: 'Павлова',
+//     experience: '3–5 лет',
+//     age: 27,
+//     address: 'Самара, ул. Молодогвардейская'
+//   },
+//   {
+//     id: 9,
+//     firstName: 'Артём',
+//     lastName: 'Фёдоров',
+//     experience: '1–3 года',
+//     age: 26,
+//     address: 'Воронеж, ул. Плехановская'
+//   },
+//   {
+//     id: 10,
+//     firstName: 'Мария',
+//     lastName: 'Белова',
+//     experience: 'Менее 1 года',
+//     age: 22,
+//     address: 'Ярославль, ул. Свободы'
+//   }
+// ]
 </script>
 
 <template>
   <div class="employee-widget">
     <h1 class="title">Менеджер сотрудников</h1>
 
-    <button class="btn" @click="open" type="button">Добавить сотрудника</button>
+    <button @click="open" class="btn btn-primary btn-add-employee" type="button">
+      Добавить сотрудника
+    </button>
 
     <EmployeeTable :employees="employees" @handle-edit="openEditEmployeeModal" />
 
@@ -46,14 +131,34 @@ const submitEmployeeForm = (employee: Employee) => {
 
 <style scoped>
 .employee-widget {
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 50px;
+  text-align: center;
 }
 
 .title {
   font-size: 32px;
   font-weight: 600;
   margin-bottom: 50px;
+}
+
+.btn-add-employee {
+  margin-bottom: 20px;
+}
+
+@media (max-width: 768px) {
+  .employee-widget {
+    padding: 20px;
+  }
+
+  .title {
+    font-size: 24px;
+  }
+
+  .btn-add-employee {
+    width: 100%;
+    margin-bottom: 10px;
+  }
 }
 </style>

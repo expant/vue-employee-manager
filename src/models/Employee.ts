@@ -3,6 +3,6 @@ export type Employee = {
   firstName: string;
   lastName: string;
   experience: string;
-  age: number;
+  age: number | null;
   address: string;
 }

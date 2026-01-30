@@ -20,7 +20,7 @@ const form = reactive<Employee>({
   firstName: '',
   lastName: '',
   experience: '',
-  age: 0,
+  age: null,
   address: '',
 });
 
@@ -69,7 +69,7 @@ watch(
     </div>
 
     <div class="actions">
-      <button type="submit" class="btn">Сохранить</button>
+      <button type="submit" class="btn btn-primary">Сохранить</button>
     </div>
   </form>
 </template>

@@ -11,7 +11,7 @@ defineEmits<{ close: [] }>();
     <Transition name="modal">
       <div v-if="isOpen" class="overlay" @click.self="$emit('close')">
         <div class="modal">
-          <button class="btn btn-icon btn-close" type="button" @click="$emit('close')">
+          <button class="btn btn-secondary  btn-icon btn-close" type="button" @click="$emit('close')">
             <CloseIcon />
           </button>
           <slot />

@@ -6,23 +6,10 @@
   text-rendering: optimizeLegibility;
 }
 
-* {
-  font-size: 18px;
-  color: #213547; 
-}
-
 body {
   margin: 0;
-  display: flex;
-  min-width: 800px;
-  min-height: 100vh;
-}
-
-#app {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
+  padding: 0;
+  box-sizing: border-box;
 }
 
 input[type="number"]::-webkit-outer-spin-button,
@@ -64,17 +51,29 @@ label {
 .btn {
   font-size: 16px;
   padding: 6px 10px;
-  background: #f6f8fa;
-  border: 1px solid #d0d7de;
+  border: none;
   border-radius: 6px;
   color: #213547;
   cursor: pointer;
   transition: all 0.2s ease;
 }
 
-.btn:hover {
-  background: #eaeef2;
-  border-color: #b6bac0;
+.btn-primary {
+  background: #0969da;
+  color: #fff;
+}
+
+.btn-secondary {
+  background: #f6f8fa;
+  color: #24292f;
+}
+
+.btn-primary:hover {
+  background: #005cc5;
+}
+
+.btn-secondary:hover {
+  background: #d0d7de;
 }
 
 .btn-icon {
